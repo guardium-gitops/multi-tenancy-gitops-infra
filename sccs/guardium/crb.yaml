@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "275"
+  name: "default-restricted-guardium"
+  labels:
+    app: "guardium"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: "ibm-guardium-restricted-scc"
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: guardium
