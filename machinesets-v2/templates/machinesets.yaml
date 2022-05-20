@@ -1,0 +1,7 @@
+{{- $zones := include "cloud.zones" . | replace "[" ""|replace "]" ""|split " " -}}
+{{- range $z, $zone := $zones -}}
+  {{- $params := dict "Values" $.Values "Zone" $zone -}}
+  {{ printf "\n---" }}
+  {{- include "machineset.header" $params -}}
+  {{- include "machineset.providerspec" $params | nindent 6 -}}
+{{- end -}}
