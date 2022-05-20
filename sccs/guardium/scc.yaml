@@ -6,8 +6,8 @@ metadata:
       requiring pods to run with a non-root UID, and preventing pods from accessing the host.
       The UID and GID will be bound by ranges specified at the Namespace level."
     cloudpak.ibm.com/version: "1.2.0"
-    cloudpak.ibm.com/deprecated: true
-  name: ibm-guardium-restricted-scc
+    cloudpak.ibm.com/deprecated: "true"
+  name: ibm-restricted-scc
 allowHostDirVolumePlugin: false
 allowHostIPC: false
 allowHostNetwork: false
