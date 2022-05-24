@@ -7,6 +7,7 @@ rules:
       - operator.ibm.com
     resources:
       - operandconfigs
+      - operandregistries
     verbs:
       - update
       - create
