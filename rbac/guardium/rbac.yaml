@@ -14,6 +14,16 @@ rules:
       - list
       - delete
       - patch
+  - apiGroups:
+      - gi.ds.isc.ibm.com
+    resources:
+      - guardiuminsights
+    verbs:
+      - update
+      - create
+      - list
+      - delete
+      - patch
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
