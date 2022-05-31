@@ -18,6 +18,7 @@ cloud:
     datastore: 
     cluster: 
     server:
+    folder:
 
 machineset:
   name:

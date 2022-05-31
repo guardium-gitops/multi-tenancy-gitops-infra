@@ -1,3 +1,5 @@
+{{- $role := include "machineset.clusterRole" . -}}
+{{- if ne $role "worker" -}}
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfigPool
 metadata:
@@ -12,9 +14,10 @@ spec:
       operator: In
       values:
       - worker
-      - {{ include "machineset.clusterrole" . }}
+      - {{ $role }}
 {{- if $.Values.machineset.labels }}
   nodeSelector:
     matchLabels:
 {{- toYaml (default $.Values.machineset.labels) | nindent 6 -}}
+{{- end -}}
 {{- end -}}

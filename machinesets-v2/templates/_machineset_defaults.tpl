@@ -79,7 +79,9 @@ Default Node Volume Type
   {{- default "128" .Values.machineset.volumeSize -}}
 {{- end -}}
 
-
+{{- define "machineset.clusterRole" -}}
+  {{- default "worker" .Values.machineset.clusterRole -}}
+{{- end -}}
 {{- define "machineset.image" -}}
   {{- $image := required "You need to provide the cloud.image of your AWS cluster in your values.yaml file" $.Values.cloud.aws.ami -}}
   {{ .Values.cloud.aws.ami }}
@@ -95,6 +97,10 @@ Default Node Volume Type
 
 {{- define "machineset.vsphere.defaultNodeMemory" -}}
   {{- default "16384" $.Values.machineset.memoryMiB }}
+{{- end -}}
+
+{{- define "machineset.vsphere.folder" -}}
+  {{- default $.Values.infrastructureId $.Values.cloud.vsphere.folder -}}
 {{- end -}}
 
 {{- define "machineset.azure.resourceGroup" -}}

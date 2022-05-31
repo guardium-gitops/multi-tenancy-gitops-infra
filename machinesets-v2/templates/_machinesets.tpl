@@ -147,17 +147,17 @@ providerSpec:
 {{- end -}}
 
 {{- define "machineset.providerspec.vsphere" -}}
-{{- $networkName := required "Missing vsphere.networkName in your values.yaml file" .Values.vsphere.networkName -}}
-{{- $datacenter := required "Missing vsphere.datacenter in your values.yaml file" .Values.vsphere.datacenter -}}
-{{- $datastore := required "Missing vsphere.datastore in your values.yaml file" .Values.vsphere.datastore -}}
-{{- $cluster := required "Missing vsphere.cluster in your values.yaml file" .Values.vsphere.cluster -}}
-{{- $server := required "Missing vsphere.server in your values.yaml file" .Values.vsphere.server -}}
+{{- $networkName := required "Missing vsphere.networkName in your values.yaml file" .Values.cloud.vsphere.networkName -}}
+{{- $datacenter := required "Missing vsphere.datacenter in your values.yaml file" .Values.cloud.vsphere.datacenter -}}
+{{- $datastore := required "Missing vsphere.datastore in your values.yaml file" .Values.cloud.vsphere.datastore -}}
+{{- $cluster := required "Missing vsphere.cluster in your values.yaml file" .Values.cloud.vsphere.cluster -}}
+{{- $server := required "Missing vsphere.server in your values.yaml file" .Values.cloud.vsphere.server -}}
 providerSpec:
   value:
     apiVersion: vsphereprovider.openshift.io/v1beta1
     credentialsSecret:
       name: vsphere-cloud-credentials
-    diskGiB: {{ include "machineset.vsphere.defaultNodeDiskSize" . }}
+    diskGiB: {{ include "machineset.volumeSize" . }}
     kind: VSphereMachineProviderSpec
     memoryMiB: {{ include "machineset.vsphere.defaultNodeMemory" . }}
     metadata:
@@ -173,10 +173,10 @@ providerSpec:
       name: worker-user-data
     workspace:
       datacenter: {{ $datacenter }}
-      datastore: {{ .Values.vsphere.datastore }}
-      folder: /{{ .Values.vsphere.datacenter }}/vm/{{ .Values.infrastructureId }}
-      resourcePool: /{{ .Values.vsphere.datacenter }}/host/{{ .Values.vsphere.cluster }}/Resources
-      server: {{ .Values.vsphere.server }}
+      datastore: {{ .Values.cloud.vsphere.datastore }}
+      folder: /{{ .Values.cloud.vsphere.datacenter }}/vm/{{ include "machineset.vsphere.folder" . }}
+      resourcePool: /{{ .Values.cloud.vsphere.datacenter }}/host/{{ .Values.cloud.vsphere.cluster }}/Resources
+      server: {{ .Values.cloud.vsphere.server }}
 {{- end -}}
 
 {{- define "machineset.providerspec.ibmcloud" -}}
