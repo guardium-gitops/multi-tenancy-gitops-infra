@@ -82,6 +82,7 @@ Default Node Volume Type
 {{- define "machineset.clusterRole" -}}
   {{- default "worker" .Values.machineset.clusterRole -}}
 {{- end -}}
+
 {{- define "machineset.image" -}}
   {{- $image := required "You need to provide the cloud.image of your AWS cluster in your values.yaml file" $.Values.cloud.aws.ami -}}
   {{ .Values.cloud.aws.ami }}
